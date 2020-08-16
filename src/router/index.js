@@ -7,7 +7,8 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/dashboard'
+            component: () => import(/* webpackChunkName: "login" */ '../components/page/Login.vue'),
+            meta: { title: '登录' }
         },
         {
             path: '/',
@@ -107,6 +108,12 @@ export default new Router({
                     path: '/user',
                     component: () => import(/* webpackChunkName: "donate" */ '../components/page/user/User.vue'),
                     meta: { title: '用戶管理' }
+                },
+                {
+                    // 员工管理
+                    path: '/person',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/user/Person.vue'),
+                    meta: { title: '员工管理' }
                 }
             ]
             

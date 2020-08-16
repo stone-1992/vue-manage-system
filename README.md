@@ -84,6 +84,12 @@ npm run serve
 // 执行构建命令，生成的dist文件夹放在服务器下即可访问
 npm run build
 ```
+// 出现 A complete log of this run can be fund in: C\Users\用户\AppData\Roaming\npm-cache_logs\2018-9-24T10_55_24_806Z-debug.log
+1、将node_modules 文件夹删除
+2、清理缓存命令
+    npm cache clean --force
+3、重新安装
+    npm install /cnpm install 
 
 ## 组件使用说明与演示
 

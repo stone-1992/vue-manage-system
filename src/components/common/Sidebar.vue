@@ -64,12 +64,24 @@ export default {
                 },
                 {
                     icon: 'el-icon-lx-home',
-                    index: 'user',
-                    title: '用戶管理'
+                    index: 'dashboard1',
+                    title: '权限管理',
+                    subs:[
+                        {
+                            icon: 'el-icon-lx-home',
+                            index: 'user',
+                            title: '用户管理'
+                        },
+                        {
+                            icon: 'el-icon-lx-home',
+                            index: 'person',
+                            title: '员工管理'
+                        }
+                    ]
                 },
                 {
                     icon: 'el-icon-lx-home',
-                    index: 'dashboard',
+                    index: 'dashboard2',
                     title: '自定义菜单栏',
                     subs:[
                         {

@@ -53,7 +53,7 @@ export default {
                             _this.$message.success('登录成功');
                             localStorage.setItem('ms_username', _this.param.username);
                             localStorage.setItem('token',resp.data.access_token)
-                            _this.$router.push('/');
+                            _this.$router.push('/dashboard');
                         }
                     }).catch(function(resp){
                         _this.$message.error("账号或者密码错误");
