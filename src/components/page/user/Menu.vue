@@ -18,8 +18,6 @@
                 <el-input v-model="query.keyword" placeholder="用户名" class="handle-input mr10"></el-input>
                 <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
                 <el-button type="primary" icon="el-icon-plus" @click="handleAdd" >新增</el-button>
-                <el-button type="primary" @click="importHander" >导入员工<i class="el-icon-upload el-icon--right"></i></el-button>
-                <el-button type="primary" icon="el-icon-download" @click="template">下载模板</el-button>
             </div>
             <el-table
                 :data="tableData"
@@ -30,16 +28,13 @@
                 @selection-change="handleSelectionChange"
             >
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
-                <el-table-column prop="personName" label="员工姓名" align="center"></el-table-column>
-                <el-table-column prop="mobile" label="手机号码" align="center"></el-table-column>
-                <el-table-column prop="gender" label="员工性别" :formatter="genderFormat"></el-table-column>
-                <el-table-column prop="cardNumber" label="员工卡号"></el-table-column>
-                <el-table-column prop="entryDate" label="入职日期"></el-table-column>
-                <el-table-column prop="age" label="年龄"></el-table-column>
-                <el-table-column prop="email" label="邮箱"></el-table-column>
-                <el-table-column prop="nationCode" label="名族代码" :formatter="nationCodeFormat"></el-table-column>
-                <el-table-column prop="nativePlace" label="籍贯"></el-table-column>
-                <el-table-column prop="remark" label="备注"></el-table-column>
+                <el-table-column prop="name" label="菜单名称" align="center"></el-table-column>
+                <el-table-column prop="code" label="菜单编码" align="center"></el-table-column>
+                <el-table-column prop="parentId" label="上级ID" align="center"></el-table-column>
+                <el-table-column prop="url" label="url" align="center"></el-table-column>
+                <el-table-column prop="icon" label="图标" align="center"></el-table-column>
+                <el-table-column prop="layer" label="层级" align="center"></el-table-column>
+                <el-table-column prop="remark" label="备注" align="center"></el-table-column>
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
                         <el-button
@@ -180,31 +175,6 @@
             <span slot="footer" class="dialog-footer">
                 <el-button @click="addVisible = false">取 消</el-button>
                 <el-button type="primary" @click="addPerson">确 定</el-button>
-            </span>
-        </el-dialog>
-
-
-        <!-- 导入员工弹出框 -->
-        <el-dialog title="导入员工" :visible.sync="importUserVisible" width="30%">
-            <el-upload
-              :action="actionUrl"
-              class="upload-demo"
-              :multiple="false"
-              name="file"
-              ref="upload"
-              :file-list="fileList"
-              accept=".csv,.xls,.xlsx"
-              :auto-upload="false"
-              :on-success="uploadSuccess"
-              :limit="1"
-            >
-        　　<el-button slot="trigger" size="small">选取文件</el-button>
-        　　<el-button style="margin-left: 10px;" size="small"  type="primary" @click="submitUpload">上传到服务器</el-button>
-        　　<div slot="tip" class="el-upload__tip">只能上传csv/xslx/xsl文件，且不超过1M</div>
-        </el-upload>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="importUserVisible = false">取 消</el-button>
-                <!-- <el-button type="primary" @click="importUser">确 定</el-button> -->
             </span>
         </el-dialog>
     </div>

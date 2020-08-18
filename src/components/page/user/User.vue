@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import { fetchData,addUser,deleteUser,deleteRequest,getRequest,putRequest } from '../../../api/index';
+import { fetchData,addUser,deleteUser,deletePostRequest,deleteParamRequest,getRequest,putRequest } from '../../../api/index';
 import request from '../../../utils/request';
 export default {
     name: 'basetable',
@@ -129,7 +129,7 @@ export default {
                 address: '',
                 keyword: '',
                 pageNo: 1,
-                pageSize: 10
+                pageSize: 30
             },
             tableData: [],
             multipleSelection: [],
@@ -166,7 +166,7 @@ export default {
                 type: 'warning'
             })
                 .then(() => {
-                    deleteRequest('user-center/user/deleteUserAuth', row).then(res => {
+                    deleteParamRequest('user-center/user/deleteUserAuth', row).then(res => {
                         if(res.result){
                             this.$message.success('删除成功');
                             this.getData();
@@ -189,7 +189,7 @@ export default {
                 str.push(this.multipleSelection[i].id);
             }
             let query = {ids:str};
-            deleteRequest('user-center/user/deleteAuthUserBath', query).then(res => {
+            deletePostRequest('user-center/user/deleteAuthUserBath', query).then(res => {
                 if(res.result){
                     this.$message.success('批量删除成功');
                     this.getData();

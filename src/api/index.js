@@ -29,11 +29,19 @@ export const postRequest = (url,query) => {
 };
 
 // delete 请求方式
-export const deleteRequest = (url, query) => {
+export const deletePostRequest = (url, query) => {
     return request({
         url: url,
         method: 'delete',
-        data: query,
+        data: query
+    });
+};
+
+// delete 请求方式
+export const deleteParamRequest = (url, query) => {
+    return request({
+        url: url,
+        method: 'delete',
         params: query
     });
 };

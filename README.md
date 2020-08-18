@@ -1,75 +1,13 @@
 # vue-manage-system
 
-<a href="https://github.com/vuejs/vue">
-    <img src="https://img.shields.io/badge/vue-2.6.10-brightgreen.svg" alt="vue">
-  </a>
-  <a href="https://github.com/ElemeFE/element">
-    <img src="https://img.shields.io/badge/element--ui-2.8.2-brightgreen.svg" alt="element-ui">
-  </a>
-  <a href="https://github.com/lin-xin/vue-manage-system/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
-  </a>
-  <a href="https://github.com/lin-xin/vue-manage-system/releases">
-    <img src="https://img.shields.io/github/release/lin-xin/vue-manage-system.svg" alt="GitHub release">
-  </a>
-  <a href="https://lin-xin.gitee.io/example/work/#/donate">
-    <img src="https://img.shields.io/badge/%24-donate-ff69b4.svg" alt="donate">
-  </a>
 
-基于 Vue + Element UI 的后台管理系统解决方案。[线上地址](https://lin-xin.gitee.io/example/work/)
 
-> React + Ant Design 的版本正在开发中，仓库地址：[react-manage-system](https://github.com/lin-xin/react-manage-system)
+基于 Vue + Element UI 的后台管理系统解决方案
 
-[English document](https://github.com/lin-xin/manage-system/blob/master/README_EN.md)
-
-## 项目截图
-
-### 登录
-
-![Image text](https://github.com/lin-xin/manage-system/raw/master/screenshots/wms3.png)
-
-### 默认皮肤
-
-![Image text](https://github.com/lin-xin/manage-system/raw/master/screenshots/wms1.png)
-
-### 浅绿色皮肤
-
-![Image text](https://github.com/lin-xin/manage-system/raw/master/screenshots/wms2.png)
-
-## 赞赏
-
-请作者喝杯咖啡吧！(微信号：linxin_20)
-
-![微信扫一扫](https://lin-xin.gitee.io/images/weixin.jpg)
-
-## 特别鸣谢
-
-- [实验楼](https://www.shiyanlou.com?source=vue-manage-system)
 
 ## 前言
 
 该方案作为一套多功能的后台框架模板，适用于绝大部分的后台管理系统（Web Management System）开发。基于 vue.js，使用 vue-cli3 脚手架，引用 Element UI 组件库，方便开发快速简洁好看的组件。分离颜色样式，支持手动切换主题色，而且很方便使用自定义主题色。
-
-## 功能
-
--   [x] Element UI
--   [x] 登录/注销
--   [x] Dashboard
--   [x] 表格
--   [x] Tab 选项卡
--   [x] 表单
--   [x] 图表 :bar_chart:
--   [x] 富文本编辑器
--   [x] markdown 编辑器
--   [x] 图片拖拽/裁剪上传
--   [x] 支持切换主题色 :sparkles:
--   [x] 列表拖拽排序
--   [x] 权限测试
--   [x] 404 / 403
--   [x] 三级菜单
--   [x] 自定义图标
--   [x] 可拖拽弹窗
--   [x] 国际化
 
 ## 安装步骤
 
@@ -91,63 +29,6 @@ npm run build
 3、重新安装
     npm install /cnpm install 
 
-## 组件使用说明与演示
-
-### vue-schart
-
-vue.js 封装 sChart.js 的图表组件。访问地址：[vue-schart](https://github.com/linxin/vue-schart)
-
-<p><a href="https://www.npmjs.com/package/vue-schart"><img src="https://img.shields.io/npm/dm/vue-schart.svg" alt="Downloads"></a></p>
-
-```html
-<template>
-    <div>
-        <schart class="wrapper" canvasId="myCanvas" :options="options"></schart>
-    </div>
-</template>
-
-<script>
-    import Schart from 'vue-schart'; // 导入Schart组件
-    export default {
-        data() {
-            return {
-                options: {
-                    type: 'bar',
-                    title: {
-                        text: '最近一周各品类销售图'
-                    },
-                    labels: ['周一', '周二', '周三', '周四', '周五'],
-                    datasets: [
-                        {
-                            label: '家电',
-                            data: [234, 278, 270, 190, 230]
-                        },
-                        {
-                            label: '百货',
-                            data: [164, 178, 190, 135, 160]
-                        },
-                        {
-                            label: '食品',
-                            data: [144, 198, 150, 235, 120]
-                        }
-                    ]
-                }
-            };
-        },
-        components: {
-            Schart
-        }
-    };
-</script>
-<style>
-    .wrapper {
-        width: 7rem;
-        height: 5rem;
-    }
-</style>
-```
-
-## 其他注意事项
 
 ### 一、如果我不想用到上面的某些组件呢，那我怎么在模板中删除掉不影响到其他功能呢？
 

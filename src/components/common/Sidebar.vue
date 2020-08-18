@@ -76,6 +76,11 @@ export default {
                             icon: 'el-icon-lx-home',
                             index: 'person',
                             title: '员工管理'
+                        },
+                        {
+                            icon: 'el-icon-lx-home',
+                            index: 'menu',
+                            title: '菜单管理'
                         }
                     ]
                 },

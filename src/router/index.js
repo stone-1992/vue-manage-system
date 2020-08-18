@@ -114,6 +114,12 @@ export default new Router({
                     path: '/person',
                     component: () => import(/* webpackChunkName: "donate" */ '../components/page/user/Person.vue'),
                     meta: { title: '员工管理' }
+                },
+                {
+                    // 菜单管理
+                    path: '/menu',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/user/Menu.vue'),
+                    meta: { title: '菜单管理' }
                 }
             ]
             
