@@ -15,7 +15,7 @@
                     class="handle-del mr10"
                     @click="delAllSelection"
                 >批量删除</el-button>
-                <el-input v-model="query.keyword" placeholder="用户名" class="handle-input mr10"></el-input>
+                <el-input v-model="query.keyword" placeholder="菜单名" class="handle-input mr10"></el-input>
                 <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
                 <el-button type="primary" icon="el-icon-plus" @click="handleAdd" >新增</el-button>
             </div>
@@ -30,7 +30,7 @@
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
                 <el-table-column prop="name" label="菜单名称" align="center"></el-table-column>
                 <el-table-column prop="code" label="菜单编码" align="center"></el-table-column>
-                <el-table-column prop="parentId" label="上级ID" align="center"></el-table-column>
+                <el-table-column prop="parentId" label="上级ID" align="center" :formatter="menuFormat"></el-table-column>
                 <el-table-column prop="url" label="url" align="center"></el-table-column>
                 <el-table-column prop="icon" label="图标" align="center"></el-table-column>
                 <el-table-column prop="layer" label="层级" align="center"></el-table-column>
@@ -66,49 +66,28 @@
         <!-- 编辑弹出框 -->
         <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
             <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-               <el-form-item label="员工姓名" prop="personName">
-                    <el-input v-model="form.personName"></el-input>
+               <el-form-item label="菜单名称" prop="name">
+                    <el-input v-model="form.name"></el-input>
                 </el-form-item>
-                <el-form-item label="手机号码" prop="mobile">
-                    <el-input v-model="form.mobile"></el-input>
+                <el-form-item label="菜单编码" prop="code">
+                    <el-input v-model="form.code"></el-input>
                 </el-form-item>
-                <el-form-item label="员工性别" prop="gender">
+                <el-form-item label="上级ID" prop="parentId">
                     <!-- <el-input v-model="form.gender"></el-input> -->
-                    <el-select v-model="form.gender" placeholder="请选择">
+                    <el-select v-model="form.parentId" placeholder="请选择">
                         <el-option
-                            v-for="item in genders"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                            v-for="item in menus"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="员工卡号" prop="cardNumber">
-                    <el-input v-model="form.cardNumber"></el-input>
+                <el-form-item label="跳转url" prop="url">
+                    <el-input v-model="form.url"></el-input>
                 </el-form-item>
-                <el-form-item label="入职日期" prop="entryDate">
-                    <!-- <el-input v-model="form.entryDate"></el-input> -->
-                    <el-date-picker v-model="form.entryDate" type="date" placeholder="选择入职日期"></el-date-picker>
-                </el-form-item>
-                <el-form-item label="年龄" prop="age">
-                    <el-input v-model.number="form.age"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" prop="email">
-                    <el-input v-model="form.email"></el-input>
-                </el-form-item>
-                <el-form-item label="名族代码" prop="nationCode">
-                    <!-- <el-input v-model="form.nationCode"></el-input> -->
-                    <el-select v-model="form.nationCode" placeholder="请选择">
-                        <el-option
-                            v-for="item in nationCodes"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="籍贯" prop="nativePlace">
-                    <el-input v-model="form.nativePlace"></el-input>
+                <el-form-item label="图标" prop="icon">
+                    <el-date-picker v-model="form.icon" type="date" placeholder="选择入职日期"></el-date-picker>
                 </el-form-item>
                 <el-form-item label="备注" prop="remark">
                     <el-input v-model="form.remark"></el-input>
@@ -124,49 +103,28 @@
          <!-- 新增弹出框 -->
         <el-dialog title="新增" :visible.sync="addVisible" width="30%">
             <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-                <el-form-item label="员工姓名" prop="personName">
-                    <el-input v-model="form.personName"></el-input>
+                <el-form-item label="菜单名称" prop="name">
+                    <el-input v-model="form.name"></el-input>
                 </el-form-item>
-                <el-form-item label="手机号码" prop="mobile">
-                    <el-input v-model="form.mobile"></el-input>
+                <el-form-item label="菜单编码" prop="code">
+                    <el-input v-model="form.code"></el-input>
                 </el-form-item>
-                <el-form-item label="员工性别">
-                    <!-- <el-input v-model="form.gender"></el-input> -->
-                    <el-select v-model="form.gender" placeholder="请选择">
+                <el-form-item label="上级ID" prop="parentId">
+                    <!-- <el-tree :data="menus" @node-click="handleNodeClick"></el-tree> -->
+                    <el-select v-model="form.parentId" placeholder="请选择">
                         <el-option
-                            v-for="item in genders"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                        v-for="item in menus"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id">
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="员工卡号" prop="cardNumber">
-                    <el-input v-model="form.cardNumber"></el-input>
+                <el-form-item label="跳转url" prop="url">
+                    <el-input v-model="form.url"></el-input>
                 </el-form-item>
-                <el-form-item label="入职日期" prop="entryDate">
-                    <!-- <el-input v-model="form.entryDate"></el-input> -->
-                    <el-date-picker v-model="form.entryDate" type="date" placeholder="选择入职日期"></el-date-picker>
-                </el-form-item>
-                <el-form-item label="年龄" prop="age">
-                    <el-input v-model.number="form.age"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱">
-                    <el-input v-model="form.email"></el-input>
-                </el-form-item>
-                <el-form-item label="名族代码">
-                    <!-- <el-input v-model="form.nationCode"></el-input> -->
-                    <el-select v-model="form.nationCode" placeholder="请选择">
-                        <el-option
-                            v-for="item in nationCodes"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="籍贯">
-                    <el-input v-model="form.nativePlace"></el-input>
+                <el-form-item label="图标" prop="icon">
+                    <el-date-picker v-model="form.icon" type="date" placeholder="选择入职日期"></el-date-picker>
                 </el-form-item>
                 <el-form-item label="备注">
                     <el-input v-model="form.remark"></el-input>
@@ -186,7 +144,6 @@ import {genders,nationCodes} from '../../../api/contants';
 import request from '../../../utils/request';
 export default {
     name: 'basetable',
-    
     data() {
         return {
             query: {
@@ -199,35 +156,36 @@ export default {
             delList: [],
             editVisible: false,
             addVisible: false,
-            importUserVisible:false,
             pageTotal: 0,
             form: {},
             idx: -1,
             id: -1,
             actionUrl:"http://localhost:8005/user-center/person/import",
-            genders:genders,
-            nationCodes:nationCodes,
             rules: {
-                personName: [{ required: true, message: '请输入员工姓名', trigger: 'blur' }],
-                mobile: [{ required: true, message: '请输入手机号码', trigger: 'blur' }],
-                cardNumber: [{ required: true, message: '请输入员工卡号', trigger: 'blur' }],
-                entryDate: [{ required: true, message: '请输入入职日期', trigger: 'blur' }],
-                age: [
-                    { required: true, message: '请输入年龄', trigger: 'blur' },
-                    { type: 'number', message: '年龄必须为数字值', trigger: 'blur'}
-                ],
-            }
+                name: [{ required: true, message: '请输入菜单名称', trigger: 'blur' }],
+                code: [{ required: true, message: '请输入菜单编码', trigger: 'blur' }],
+                // parentId: [{ required: true, message: '请输入上级组织', trigger: 'blur' }],
+                // url: [{ required: true, message: '请输入url', trigger: 'blur' }]
+            },
+            menus:[]
 
             
         };
     },
     created() {
         this.getData();
+        this.getMenu();
     },
     methods: {
+        // 获取菜单数据
+        getMenu() {
+            getRequest("user-center/menu/selectMenuList",null).then(res => {
+                this.menus = res.data;
+            });
+        },
         // 获取用户列表数据
         getData() {
-            getRequest("user-center/person/selectPersonByPage",this.query).then(res => {
+            getRequest("user-center/menu/selectMenuByPage",this.query).then(res => {
                 this.tableData = res.data;
                 this.pageTotal = res.pageBean.pageDataCount;
             });
@@ -243,7 +201,7 @@ export default {
             this.$confirm('确定要删除吗？', '提示', {
                 type: 'warning'
             }).then(() => {
-                    deleteParamRequest('user-center/person/deletePerson', row).then(res => {
+                    deleteParamRequest('user-center/menu/deleteMenu', row).then(res => {
                         if(res.result){
                             this.$message.success('删除成功');
                             this.getData();
@@ -259,6 +217,7 @@ export default {
         handleSelectionChange(val) {
             this.multipleSelection = val;
         },
+        // 多选删除操作
         delAllSelection() {
             const length = this.multipleSelection.length;
             let str = [];
@@ -267,7 +226,7 @@ export default {
                 str.push(this.multipleSelection[i].id);
             }
             let query = {ids:str};
-            deletePostRequest('user-center/person/deletePersonBath', query).then(res => {
+            deletePostRequest('user-center/menu/deleteMenuBath', query).then(res => {
                 if(res.result){
                     this.$message.success('批量删除成功');
                     this.getData();
@@ -279,6 +238,9 @@ export default {
         },
         // 编辑操作
         handleEdit(index, row) {
+            // 获取菜单信息
+            this.getMenu();
+
             this.idx = index;
             this.form = row;
             this.editVisible = true;
@@ -288,7 +250,7 @@ export default {
             this.$refs.form.validate(valid => {
                 if (valid) {
                     this.editVisible = false;
-                    putRequest('user-center/person/updatePerson', this.form).then(res => {
+                    putRequest('user-center/menu/updateMenu', this.form).then(res => {
                         if(res.result){
                             this.$message.success('更新成功');
                             this.getData();
@@ -297,6 +259,9 @@ export default {
                         }
                     });
                     this.$set(this.tableData, this.idx, this.form);
+
+                    // 清空表单数据
+                    this.form = {};
                 } else {
                     return false;
                 }
@@ -305,17 +270,23 @@ export default {
         },
         // 新增操作
         handleAdd() {
-           this.addVisible = true;
+            // 获取菜单信息
+            this.getMenu();
+            
+            this.addVisible = true;
         },
         // 新增保存
         addPerson() {
             this.$refs.form.validate(valid => {
                 if (valid) {
-                    postRequest('user-center/person/addPerson', this.form).then(res => {
+                    postRequest('user-center/menu/addMenu', this.form).then(res => {
                         if(res.result){
                             this.$message.success('新增成功');
                             this.addVisible = false;
                             this.getData();
+
+                            // 清空表单数据
+                            this.form = {};
                         }else{
                             this.$message.error(res.resultDesc);
                         }
@@ -326,68 +297,12 @@ export default {
             });
             
         },
-        // 导入用户
-        importHander(){
-            this.importUserVisible = true;
-        },
-        importUser(){
-            this.importUserVisible = false;
-        },
-        // 下载模板
-        template(){
-            getFileRequest('user-center/person/template',null).then(res =>{
-                        console.log(res)
-                        let data = res;
-                        if (!data) {
-                            this.$message.error('下载失败，解析数据为空！');
-                            return
-                        }
-                        // const datetime = Date.now();
-                        // 创建一个新的url，此url指向新建的Blob对象
-                        let url = window.URL.createObjectURL(new Blob([data],{type: 'application/vnd.ms-excel'}))
-                        // 创建a标签，并隐藏改a标签
-                        let link = document.createElement('a')
-                        link.style.display = 'none'
-                        // a标签的href属性指定下载链接
-                        link.href = url
-                        //setAttribute() 方法添加指定的属性，并为其赋指定的值。
-                        let fileName = '购买明细表.xlsx'
-                        link.setAttribute('download', fileName )
-                        document.body.appendChild(link)
-                        link.click()
-                        this.$Message.info('导出成功');
-                        this.modal3 = false;       
-            });
-        },
-        submitUpload(){
-            let res = this.$refs.upload.submit();
-            this.importUserVisible = false;
-        },
-        // 文件上传成功
-        uploadSuccess(res, file, fileList){
-            if(res.result){
-                // 重新加载列表数据
-                this.getData();
-                this.$message.success('导入员工成功');
-            }else{
-                this.$message.error(res.resultDesc);
-            }
-        },
         // 列表页性别转换
-        genderFormat(row, column){
-            for(let i = 0; i < this.genders.length; i++){
-                let gender = this.genders[i];
-                if(row.gender == gender.value){
-                    return gender.label;
-                }
-            }
-        },
-        // 列表名族代码转换
-        nationCodeFormat(row, column){
-            for(let i = 0; i < this.nationCodes.length; i++){
-                let nationCode = this.nationCodes[i];
-                if(row.nationCode == nationCode.value){
-                    return nationCode.label;
+        menuFormat(row, column){
+            for(let i = 0; i < this.menus.length; i++){
+                let menu = this.menus[i];
+                if(row.parentId == menu.id){
+                    return menu.name;
                 }
             }
         },
