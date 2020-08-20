@@ -1,5 +1,5 @@
 // 常量定义js 
-
+// 性别常量字典
 export const genders = [
     {
         label:'男',
@@ -15,7 +15,19 @@ export const genders = [
     }
 ];
 
+// 是否常量字典
+export const status =[
+    {
+        label : '是',
+        value : '1'
+    },
+    {
+        label : '否',
+        value : '0'
+    }
+];
 
+// 名族常量字典
 export const nationCodes = [
     {
         label:'汉族',

@@ -31,6 +31,7 @@
                 <el-table-column prop="name" label="菜单名称" align="center"></el-table-column>
                 <el-table-column prop="code" label="菜单编码" align="center"></el-table-column>
                 <el-table-column prop="parentId" label="上级ID" align="center" :formatter="menuFormat"></el-table-column>
+                <el-table-column prop="status" label="是否启用" align="center" :formatter="statusFormat"></el-table-column>
                 <el-table-column prop="url" label="url" align="center"></el-table-column>
                 <el-table-column prop="icon" label="图标" align="center"></el-table-column>
                 <el-table-column prop="layer" label="层级" align="center"></el-table-column>
@@ -83,11 +84,21 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
+                <el-form-item label="是否启用" prop="status">
+                    <el-select v-model="form.status" placeholder="请选择">
+                        <el-option
+                        v-for="item in status"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
                 <el-form-item label="跳转url" prop="url">
                     <el-input v-model="form.url"></el-input>
                 </el-form-item>
                 <el-form-item label="图标" prop="icon">
-                    <el-date-picker v-model="form.icon" type="date" placeholder="选择入职日期"></el-date-picker>
+                    <el-input v-model="form.icon"></el-input>
                 </el-form-item>
                 <el-form-item label="备注" prop="remark">
                     <el-input v-model="form.remark"></el-input>
@@ -120,11 +131,21 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
+                <el-form-item label="是否启用" prop="status">
+                    <el-select v-model="form.status" placeholder="请选择">
+                        <el-option
+                        v-for="item in status"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
                 <el-form-item label="跳转url" prop="url">
                     <el-input v-model="form.url"></el-input>
                 </el-form-item>
                 <el-form-item label="图标" prop="icon">
-                    <el-date-picker v-model="form.icon" type="date" placeholder="选择入职日期"></el-date-picker>
+                    <el-input v-model="form.icon"></el-input>
                 </el-form-item>
                 <el-form-item label="备注">
                     <el-input v-model="form.remark"></el-input>
@@ -140,7 +161,7 @@
 
 <script>
 import {deletePostRequest,deleteParamRequest,getRequest,putRequest,postRequest,getFileRequest} from '../../../api/index';
-import {genders,nationCodes} from '../../../api/contants';
+import {genders,nationCodes,status} from '../../../api/contants';
 import request from '../../../utils/request';
 export default {
     name: 'basetable',
@@ -167,7 +188,8 @@ export default {
                 // parentId: [{ required: true, message: '请输入上级组织', trigger: 'blur' }],
                 // url: [{ required: true, message: '请输入url', trigger: 'blur' }]
             },
-            menus:[]
+            menus:[],
+            status: status
 
             
         };
@@ -303,6 +325,15 @@ export default {
                 let menu = this.menus[i];
                 if(row.parentId == menu.id){
                     return menu.name;
+                }
+            }
+        },
+        // 是否启用转换
+        statusFormat(row, column){
+            for(let i = 0; i < this.status.length; i++){
+                let st = this.status[i];
+                if(row.status == st.value){
+                    return st.label;
                 }
             }
         },
