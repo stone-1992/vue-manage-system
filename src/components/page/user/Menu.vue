@@ -101,7 +101,7 @@
                     <el-input v-model="form.icon"></el-input>
                 </el-form-item>
                 <el-form-item label="备注" prop="remark">
-                    <el-input v-model="form.remark"></el-input>
+                    <el-input v-model="form.remark" type="textarea" :rows="2" placeholder="请输入内容"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -148,7 +148,7 @@
                     <el-input v-model="form.icon"></el-input>
                 </el-form-item>
                 <el-form-item label="备注">
-                    <el-input v-model="form.remark"></el-input>
+                    <el-input v-model="form.remark" type="textarea" :rows="2" placeholder="请输入内容"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
