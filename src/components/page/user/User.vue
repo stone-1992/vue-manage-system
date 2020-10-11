@@ -18,7 +18,6 @@
                 <el-input v-model="query.keyword" placeholder="用户名" class="handle-input mr10"></el-input>
                 <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
                 <el-button type="primary" @click="handleAdd" style="margin-right:200px">新增</el-button>
-                <el-button type="primary" @click="importHander" style="margin-right:200px">导入用户</el-button>
             </div>
             <el-table
                 :data="tableData"
@@ -103,16 +102,6 @@
             <span slot="footer" class="dialog-footer">
                 <el-button @click="addVisible = false">取 消</el-button>
                 <el-button type="primary" @click="addUser">确 定</el-button>
-            </span>
-        </el-dialog>
-
-
-        <!-- 导入用户弹出框 -->
-        <el-dialog title="新增" :visible.sync="importUserVisible" width="30%">
-                
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="importUserVisible = false">取 消</el-button>
-                <el-button type="primary" @click="importUser">确 定</el-button>
             </span>
         </el-dialog>
     </div>
@@ -234,13 +223,7 @@ export default {
                 }
             });           
         },
-        // 导入用户
-        importHander(){
-            this.importUserVisible = true;
-        },
-        importUser(){
-            this.importUserVisible = false;
-        },
+       
         // 分页导航
         handlePageChange(val) {
             this.$set(this.query, 'pageNo', val);
