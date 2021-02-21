@@ -1,3 +1,4 @@
+<!-- 菜单管理 -->
 <template>
     <div>
         <div class="crumbs">
@@ -19,6 +20,7 @@
                 <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
                 <el-button type="primary" icon="el-icon-plus" @click="handleAdd" >新增</el-button>
             </div>
+            <!-- 菜单列表数据 -->
             <el-table
                 :data="tableData"
                 border
@@ -160,8 +162,8 @@
 </template>
 
 <script>
-import {deletePostRequest,deleteParamRequest,getRequest,putRequest,postRequest,getFileRequest} from '../../../api/index';
-import {genders,nationCodes,status} from '../../../api/contants';
+import {deletePostRequest,deleteParamRequest,getRequest,putRequest,postRequest,getFileRequest} from '../../../utils';
+import {genders,nationCodes,status} from '../../../utils/contants';
 import request from '../../../utils/request';
 export default {
     name: 'basetable',

@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { fetchData,addUser,deleteUser,deletePostRequest,deleteParamRequest,getRequest,putRequest } from '../../../api/index';
+import { fetchData,addUser,deleteUser,deletePostRequest,deleteParamRequest,getRequest,putRequest } from '../../../utils';
 import request from '../../../utils/request';
 export default {
     name: 'basetable',

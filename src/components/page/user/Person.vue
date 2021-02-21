@@ -211,8 +211,8 @@
 </template>
 
 <script>
-import {deletePostRequest,deleteParamRequest,getRequest,putRequest,postRequest,getFileRequest} from '../../../api/index';
-import {genders,nationCodes} from '../../../api/contants';
+import {deletePostRequest,deleteParamRequest,getRequest,putRequest,postRequest,getFileRequest} from '../../../utils';
+import {genders,nationCodes} from '../../../utils/contants';
 import request from '../../../utils/request';
 export default {
     name: 'basetable',

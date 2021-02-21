@@ -9,7 +9,7 @@ export const menus = [
         icon: 'el-icon-lx-home',
         code: 'dashboard1',
         name: '权限管理',
-        children:[
+        children: [
             {
                 icon: 'el-icon-lx-home',
                 code: 'user',
@@ -31,7 +31,7 @@ export const menus = [
         icon: 'el-icon-lx-home',
         code: 'dashboard2',
         name: '自定义菜单栏',
-        children:[
+        children: [
             {
                 icon: 'el-icon-lx-cascades',
                 code: 'table',
@@ -120,11 +120,10 @@ export const menus = [
                 icon: 'el-icon-lx-redpacket_fill',
                 code: '/donate',
                 name: '支持作者'
-            },
+            }
         ]
-    },                
-]
-
+    }
+];
 
 
 // menu 保存备录

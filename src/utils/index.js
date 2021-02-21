@@ -1,4 +1,4 @@
-import request from '../utils/request';
+import request from './request';
 
 // 定义统一的 axios 接口请求
 // get 请求方式
