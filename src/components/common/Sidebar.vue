@@ -67,8 +67,8 @@
 
 <script>
 import bus from '../common/bus';
-import {menus} from '../../api/menus';
-import {deletePostRequest,deleteParamRequest,getRequest,putRequest,postRequest} from '../../api/index';
+import {menus} from '../../utils/menus';
+import {deletePostRequest,deleteParamRequest,getRequest,putRequest,postRequest} from '../../utils/index';
 export default {
     data() {
         return {
